@@ -386,6 +386,42 @@
     [
       "507e7113-3c01-4251-b852-8c77f2a74b1d",
       "Root"
+    ],
+    [
+      "b954c781-f82c-45af-826a-fbe5f85e7049",
+      "fan-output"
+    ],
+    [
+      "9328a37d-03a3-4c63-b6b5-171b971693f4",
+      "fan-output1"
+    ],
+    [
+      "8c955da3-adc8-438b-b7c7-56a208f33014",
+      "fan-output2"
+    ],
+    [
+      "6494b452-a92a-4691-a65c-0df806c10a83",
+      "fan-output3"
+    ],
+    [
+      "5cba8fe0-777e-4016-8937-7c62083b14bf",
+      "fan-output4"
+    ],
+    [
+      "3f730f89-203a-4ecf-9d39-ee2f2b8bb3bf",
+      "fan-output5"
+    ],
+    [
+      "ea19b6ef-b9dc-466f-baea-e01e683266f3",
+      "fan-output6"
+    ],
+    [
+      "65717a82-319c-4318-812f-149098c14f8b",
+      "fan-output7"
+    ],
+    [
+      "da5fa1d1-cc9e-4c4e-992a-b83a41aa2c60",
+      "fan-output8"
     ]
   ],
   "text_variables": {}

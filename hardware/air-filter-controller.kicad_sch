@@ -5,185 +5,6 @@
 	(uuid "507e7113-3c01-4251-b852-8c77f2a74b1d")
 	(paper "A3")
 	(lib_symbols
-		(symbol "Connector:Barrel_Jack"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 5.334 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Barrel_Jack"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 1.27 -1.016 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 1.27 -1.016 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "DC Barrel Jack"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "DC power barrel jack connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "BarrelJack*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Barrel_Jack_0_1"
-				(rectangle
-					(start -5.08 3.81)
-					(end 5.08 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start -3.302 3.175)
-					(mid -3.9343 2.54)
-					(end -3.302 1.905)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -3.302 3.175)
-					(mid -3.9343 2.54)
-					(end -3.302 1.905)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 2.54) (xy 3.81 2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.81 -2.54) (xy -2.54 -2.54) (xy -1.27 -1.27) (xy 0 -2.54) (xy 2.54 -2.54) (xy 5.08 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 3.683 3.175)
-					(end -3.302 1.905)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-			)
-			(symbol "Barrel_Jack_1_1"
-				(pin passive line
-					(at 7.62 2.54 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -2.54 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
 				(offset 1.016) hide)
@@ -1214,6 +1035,216 @@
 				)
 			)
 		)
+		(symbol "Homebrew:DC-005-2.5A-2.0"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "DC"
+				(at 0 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "DC-005-2.5A-2.0"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Homebrew:CONN-TH_DC-005-2.5A-2.0"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://lcsc.com/product-detail/Power-Connectors_XKB-Enterprise-DC-005-2-5A-2-0_C319099.html"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C319099"
+				(at 0 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "DC-005-2.5A-2.0_0_1"
+				(arc
+					(start -7.62 -3.56)
+					(mid -6.6379 -2.54)
+					(end -7.62 -1.52)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -2.54 4.06)
+					(end -1.52 1.02)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -4.32 -2.54) (xy -4.06 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 1.52) (xy -7.62 1.52)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 3.56) (xy -7.62 3.56)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy -1.52 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -2.54) (xy -7.37 -2.54) (xy -7.87 -1.52) (xy -8.38 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy -4.32 0) (xy -4.32 -2.54) (xy -4.57 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "DC-005-2.5A-2.0_1_1"
+				(pin power_out line
+					(at 5.08 2.54 180)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 5.08 -2.54 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Homebrew:HL-AF-5060H271BU46FU79GC-S1-THL"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2139,7 +2170,7 @@
 					(justify left bottom)
 				)
 			)
-			(property "Footprint" "homebrew:HRO_TYPE-C-31-M-12"
+			(property "Footprint" "Homebrew:HRO_TYPE-C-31-M-12"
 				(at 0 0 0)
 				(effects
 					(font
@@ -4620,10 +4651,22 @@
 		(uuid "569ffd32-b250-4350-8eb6-6783858e2c4b")
 	)
 	(junction
+		(at 147.32 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5983f081-2a1f-47d9-b3d5-772dc6146555")
+	)
+	(junction
 		(at 250.19 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5a2c79c2-1e5b-4f52-92b2-7e3c6ed1b6a0")
+	)
+	(junction
+		(at 138.43 21.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6595867f-d67e-43e0-825c-d191544da40f")
 	)
 	(junction
 		(at 74.93 148.59)
@@ -4792,6 +4835,10 @@
 		(uuid "2c1d530a-bee9-4fae-82bb-c8a3bdaf7bfa")
 	)
 	(no_connect
+		(at 30.48 26.67)
+		(uuid "3e3fec71-dd7e-4204-97e6-6a8f4348bd26")
+	)
+	(no_connect
 		(at 195.58 59.69)
 		(uuid "43a6e955-4135-48ce-9aac-d10e644d0b87")
 	)
@@ -4943,7 +4990,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 41.91) (xy 165.1 41.91)
+			(xy 143.51 41.91) (xy 147.32 41.91)
 		)
 		(stroke
 			(width 0)
@@ -4983,7 +5030,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 25.4) (xy 144.78 25.4)
+			(xy 138.43 21.59) (xy 149.86 21.59)
 		)
 		(stroke
 			(width 0)
@@ -5263,7 +5310,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 25.4) (xy 144.78 22.86)
+			(xy 134.62 21.59) (xy 134.62 19.05)
 		)
 		(stroke
 			(width 0)
@@ -5280,6 +5327,26 @@
 			(type default)
 		)
 		(uuid "73f5499a-5335-4b61-994e-d3fbf58486ae")
+	)
+	(wire
+		(pts
+			(xy 147.32 41.91) (xy 165.1 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "765bd9d9-0a20-4aab-b25c-5a78296d9609")
+	)
+	(wire
+		(pts
+			(xy 138.43 21.59) (xy 134.62 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78479d89-1e69-4da3-af93-7826ae397389")
 	)
 	(wire
 		(pts
@@ -5333,7 +5400,7 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 41.91) (xy 138.43 41.91)
+			(xy 133.35 41.91) (xy 135.89 41.91)
 		)
 		(stroke
 			(width 0)
@@ -5420,6 +5487,16 @@
 			(type default)
 		)
 		(uuid "932d3334-a65e-426c-8965-b11ba5543ca4")
+	)
+	(wire
+		(pts
+			(xy 149.86 25.4) (xy 152.4 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93491732-ec51-4c81-8e73-b3614b5be5ea")
 	)
 	(wire
 		(pts
@@ -5570,6 +5647,16 @@
 			(type default)
 		)
 		(uuid "b8a41d75-d799-434b-9a38-26c42dea808a")
+	)
+	(wire
+		(pts
+			(xy 124.46 19.05) (xy 127 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bcd67088-5222-4633-94fb-8f9b0ebae9bd")
 	)
 	(wire
 		(pts
@@ -5793,6 +5880,16 @@
 	)
 	(wire
 		(pts
+			(xy 149.86 21.59) (xy 149.86 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee63a5f4-e43e-4d8f-af41-b190861c8328")
+	)
+	(wire
+		(pts
 			(xy 250.19 69.85) (xy 250.19 74.93)
 		)
 		(stroke
@@ -5800,16 +5897,6 @@
 			(type default)
 		)
 		(uuid "f0f7551a-d5e0-4e01-b951-84b061ca26c7")
-	)
-	(wire
-		(pts
-			(xy 144.78 22.86) (xy 134.62 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f16dca57-9671-4f8e-a9f0-c102289d0ddf")
 	)
 	(wire
 		(pts
@@ -5871,9 +5958,9 @@
 		)
 		(uuid "0bc6512a-65b8-4065-9a31-06df21bff683")
 	)
-	(text "Center positive"
+	(text "5.5mm/2.1mm\nCenter positive"
 		(exclude_from_sim no)
-		(at 20.066 32.512 0)
+		(at 20.828 33.528 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6382,7 +6469,7 @@
 		(uuid "7316f8a7-7b24-4ae6-951e-2598464fa359")
 	)
 	(label "BOOT"
-		(at 148.59 41.91 0)
+		(at 146.05 41.91 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7268,6 +7355,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C20917"
+			(at 358.14 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "92bc0712-0e0e-4078-8e19-4a566aed7cc4")
 		)
@@ -7293,7 +7389,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1bfd7fd8-cace-4d91-ac72-71ada0028439")
 		(property "Reference" "J14"
@@ -7312,7 +7408,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 189.23 147.32 0)
 			(effects
 				(font
@@ -7572,7 +7668,7 @@
 		(exclude_from_sim yes)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "248afd31-1880-40b4-b365-f6bfc43f8ad0")
 		(property "Reference" "H4"
@@ -7593,7 +7689,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO7380"
 			(at 21.59 265.43 0)
 			(effects
 				(font
@@ -7808,6 +7904,15 @@
 			)
 		)
 		(property "Description" "Absolute Barometric Pressure Sensor, LGA-8"
+			(at 330.2 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C83291"
 			(at 330.2 109.22 0)
 			(effects
 				(font
@@ -8561,7 +8666,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:BUZ-TH_BD9.0-P4.00-D0.6-FD"
+		(property "Footprint" "Homebrew:BUZ-TH_BD9.0-P4.00-D0.6-FD"
 			(at 185.42 199.39 0)
 			(effects
 				(font
@@ -8588,8 +8693,17 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C96256"
+		(property "LCSC Part" ""
 			(at 185.42 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C96256"
+			(at 185.42 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8693,16 +8807,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 142.24 41.91 90)
+		(at 139.7 41.91 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "517ef980-5fca-44d3-b36e-dccfcc359542")
 		(property "Reference" "R2"
-			(at 142.24 36.7495 90)
+			(at 129.54 32.9395 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8710,7 +8823,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 142.24 39.1738 90)
+			(at 139.7 39.1738 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8718,7 +8831,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 142.24 43.688 90)
+			(at 139.7 43.688 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8727,7 +8840,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 142.24 41.91 0)
+			(at 139.7 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8736,7 +8849,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 142.24 41.91 0)
+			(at 139.7 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8745,7 +8858,7 @@
 			)
 		)
 		(property "LCSC" "C11702"
-			(at 142.24 41.91 0)
+			(at 139.7 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8794,7 +8907,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 			(at 24.13 50.8 0)
 			(effects
 				(font
@@ -8813,6 +8926,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 24.13 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C6332196"
 			(at 24.13 50.8 0)
 			(effects
 				(font
@@ -9050,7 +9172,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Homebrew:SW_TACTILE_5.1MM_TS-1187A-C-D-B"
 			(at 191.77 119.38 0)
 			(effects
 				(font
@@ -9069,6 +9191,15 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
+			(at 186.69 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C318884"
 			(at 186.69 119.38 0)
 			(effects
 				(font
@@ -9236,6 +9367,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Homebrew:DC-005-2.5A-2.0")
+		(at 25.4 26.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59d34783-88f7-499f-8ddd-a81cc4544d83")
+		(property "Reference" "DC1"
+			(at 21.21 18.5925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DC-005-2.5A-2.0"
+			(at 21.21 21.0168 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Homebrew:CONN-TH_DC-005-2.5A-2.0"
+			(at 25.4 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://lcsc.com/product-detail/Power-Connectors_XKB-Enterprise-DC-005-2-5A-2-0_C319099.html"
+			(at 25.4 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 25.4 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C319099"
+			(at 25.4 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c14b69a7-56e6-420d-9ac5-f3cd13886cc1")
+		)
+		(pin "2"
+			(uuid "4909a4f6-722e-4162-bbf8-736e4f6a134e")
+		)
+		(pin "3"
+			(uuid "db3ebd27-d8b4-4101-9f49-3aadb48ccbb9")
+		)
+		(instances
+			(project ""
+				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
+					(reference "DC1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+12V")
 		(at 17.78 180.34 0)
 		(unit 1)
@@ -9303,7 +9513,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 134.62 27.94 270)
+		(at 124.46 24.13 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9312,7 +9522,7 @@
 		(fields_autoplaced yes)
 		(uuid "5e701cd9-495b-49be-adc3-f5155d3297c5")
 		(property "Reference" "SW1"
-			(at 138.303 26.7278 90)
+			(at 128.143 22.9178 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9321,7 +9531,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 138.303 29.1521 90)
+			(at 128.143 25.3421 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9329,8 +9539,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 139.7 27.94 0)
+		(property "Footprint" "Homebrew:SW_TACTILE_5.1MM_TS-1187A-C-D-B"
+			(at 129.54 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9339,7 +9549,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 139.7 27.94 0)
+			(at 129.54 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9348,7 +9558,16 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 134.62 27.94 0)
+			(at 124.46 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C318884"
+			(at 124.46 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9606,7 +9825,7 @@
 				)
 			)
 		)
-		(property "Footprint" "homebrew:HRO_TYPE-C-31-M-12"
+		(property "Footprint" "Homebrew:HRO_TYPE-C-31-M-12"
 			(at 50.8 138.43 0)
 			(effects
 				(font
@@ -10134,6 +10353,112 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D")
+		(at 147.32 45.72 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "78a23494-2ff0-48fd-859a-e57b30c267a1")
+		(property "Reference" "D35"
+			(at 149.352 44.5078 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMAJ5.0A"
+			(at 149.352 46.9321 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 147.32 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 147.32 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 147.32 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 147.32 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SMAJ5.0A"
+			(at 147.32 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C113952"
+			(at 147.32 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "10b673b5-74ee-40b3-bddd-26062080a46d")
+		)
+		(pin "2"
+			(uuid "4d5da2b2-ba2a-4d0c-824e-87ebb3d5f3ec")
+		)
+		(instances
+			(project "air-filter-controller"
+				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
+					(reference "D35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 114.3 180.34 0)
 		(unit 1)
@@ -10534,6 +10859,112 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D")
+		(at 138.43 25.4 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "83328b8e-aa38-4730-baa9-a9d426c4d4f4")
+		(property "Reference" "D36"
+			(at 140.462 24.1878 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMAJ5.0A"
+			(at 140.462 26.6121 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 138.43 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 138.43 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 138.43 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 138.43 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 138.43 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SMAJ5.0A"
+			(at 138.43 25.4 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C113952"
+			(at 138.43 25.4 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9616b65d-a59e-4e8e-89d4-5a18f5c228d1")
+		)
+		(pin "2"
+			(uuid "a41eb695-12df-48fd-a954-765785fb778f")
+		)
+		(instances
+			(project "air-filter-controller"
+				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
+					(reference "D36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 77.47 54.61 0)
 		(unit 1)
@@ -10614,7 +11045,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 135.89 52.07 0)
+		(at 133.35 52.07 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10623,7 +11054,7 @@
 		(fields_autoplaced yes)
 		(uuid "8703610d-0bbc-468f-bb69-8b5666bb3080")
 		(property "Reference" "#PWR07"
-			(at 135.89 58.42 0)
+			(at 133.35 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10632,7 +11063,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 135.89 56.2031 0)
+			(at 133.35 56.2031 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10640,7 +11071,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 135.89 52.07 0)
+			(at 133.35 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10649,7 +11080,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 52.07 0)
+			(at 133.35 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10658,7 +11089,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 135.89 52.07 0)
+			(at 133.35 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11040,7 +11471,7 @@
 		(exclude_from_sim yes)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "98237f10-cc8c-4928-8671-88fd9aca41ba")
 		(property "Reference" "H3"
@@ -11061,7 +11492,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO7380"
 			(at 21.59 260.35 0)
 			(effects
 				(font
@@ -11452,7 +11883,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Homebrew:SW_TACTILE_5.1MM_TS-1187A-C-D-B"
 			(at 158.75 119.38 0)
 			(effects
 				(font
@@ -11471,6 +11902,15 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
+			(at 153.67 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C318884"
 			(at 153.67 119.38 0)
 			(effects
 				(font
@@ -11819,7 +12259,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 53.34 54.61 0)
 			(effects
 				(font
@@ -11983,7 +12423,7 @@
 		(exclude_from_sim yes)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "ac5e2bb2-c67a-4168-b117-129794e87b76")
 		(property "Reference" "H1"
@@ -12004,7 +12444,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO7380"
 			(at 21.59 250.19 0)
 			(effects
 				(font
@@ -12350,7 +12790,7 @@
 		(exclude_from_sim yes)
 		(in_bom no)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b0555cdd-d2d3-4108-8083-dbfd5400722d")
 		(property "Reference" "H2"
@@ -12371,7 +12811,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_ISO7380"
 			(at 21.59 255.27 0)
 			(effects
 				(font
@@ -12408,74 +12848,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Barrel_Jack")
-		(at 22.86 26.67 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b2fd2a13-7c5e-4273-80bb-e4c824b1b2f9")
-		(property "Reference" "J2"
-			(at 22.86 18.7155 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Barrel_Jack"
-			(at 22.86 21.1398 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 24.13 27.686 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 24.13 27.686 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "DC Barrel Jack"
-			(at 22.86 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "16000531-fde9-482f-b37f-c89a3e01ec68")
-		)
-		(pin "1"
-			(uuid "96385f1b-7e80-427e-9c26-0c47d4ff1e47")
-		)
-		(instances
-			(project ""
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Homebrew:HL-AF-5060H271BU46FU79GC-S1-THL")
 		(at 243.84 69.85 0)
 		(unit 1)
@@ -12500,7 +12872,7 @@
 				)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:LED-ARRAY-SMD_6P-L5.4-W5.0-TL-FD"
+		(property "Footprint" "Homebrew:LED-ARRAY-SMD_6P-L5.4-W5.0-TL-FD"
 			(at 243.84 82.55 0)
 			(effects
 				(font
@@ -12527,8 +12899,17 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C219409"
+		(property "LCSC Part" ""
 			(at 243.84 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C219409"
+			(at 243.84 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12874,7 +13255,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL"
+		(property "Footprint" "Homebrew:SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL"
 			(at 61.214 209.804 0)
 			(effects
 				(font
@@ -12901,8 +13282,17 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C89358"
+		(property "LCSC Part" ""
 			(at 60.706 207.772 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C89358"
+			(at 60.96 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13362,7 +13752,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 134.62 33.02 0)
+		(at 124.46 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13371,7 +13761,7 @@
 		(fields_autoplaced yes)
 		(uuid "dbf9117f-1409-421b-b374-a04b92363f33")
 		(property "Reference" "#PWR06"
-			(at 134.62 39.37 0)
+			(at 124.46 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13380,7 +13770,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 134.62 37.1531 0)
+			(at 124.46 33.3431 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13388,7 +13778,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 134.62 33.02 0)
+			(at 124.46 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13397,7 +13787,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 134.62 33.02 0)
+			(at 124.46 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13406,7 +13796,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 134.62 33.02 0)
+			(at 124.46 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13505,7 +13895,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 135.89 46.99 270)
+		(at 133.35 46.99 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13514,7 +13904,7 @@
 		(fields_autoplaced yes)
 		(uuid "e34dfabf-64c5-4c8e-94f1-59a64cc40e68")
 		(property "Reference" "SW2"
-			(at 139.573 45.7778 90)
+			(at 137.033 45.7778 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13523,7 +13913,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 139.573 48.2021 90)
+			(at 137.033 48.2021 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13531,8 +13921,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 140.97 46.99 0)
+		(property "Footprint" "Homebrew:SW_TACTILE_5.1MM_TS-1187A-C-D-B"
+			(at 138.43 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13541,7 +13931,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 140.97 46.99 0)
+			(at 138.43 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13550,7 +13940,16 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 135.89 46.99 0)
+			(at 133.35 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C318884"
+			(at 133.35 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13580,7 +13979,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e63e62ad-26e7-49e7-a7d3-77e9594b1116")
 		(property "Reference" "J13"
@@ -13599,7 +13998,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 149.86 147.32 0)
 			(effects
 				(font
@@ -13791,6 +14190,83 @@
 			(project "air-filter-controller"
 				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
 					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 130.81 19.05 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f8ef7dfe-7313-4269-8686-2ac1d2be310b")
+		(property "Reference" "R47"
+			(at 130.81 13.8895 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 130.81 16.3138 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 130.81 20.828 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 130.81 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 130.81 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C11702"
+			(at 130.81 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b29fc04-39a6-4292-8362-16b0f2f70281")
+		)
+		(pin "2"
+			(uuid "1d9ab155-4099-4f1a-b2f7-ddb95b731e49")
+		)
+		(instances
+			(project "air-filter-controller"
+				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
+					(reference "R47")
 					(unit 1)
 				)
 			)

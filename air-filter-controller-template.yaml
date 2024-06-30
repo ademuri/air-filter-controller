@@ -1,0 +1,49 @@
+
+# These substitutions allow the end user to override certain values
+substitutions:
+  name: "air-filter-controller-template"
+  friendly_name: "Air Filter Controller Template"
+
+esphome:
+  name: "${name}"
+  # Friendly names are used where appropriate in Home Assistant
+  friendly_name: "${friendly_name}"
+  # Users will want human-readable unique names for each device.
+  name_add_mac_suffix: false
+
+  # This will allow for (future) project identification,
+  # configuration and updates.
+  project:
+    name: esphome.air-filter-controller-template
+    version: "1.0"
+
+esp32:
+  board: adafruit_feather_esp32s3_tft
+  framework:
+    type: arduino
+
+# To be able to get logs from the device via serial and api.
+logger:
+
+# API is a requirement of the dashboard import.
+api:
+
+# OTA is required for Over-the-Air updating
+ota:
+  platform: esphome
+
+# TODO: fill this out or remove it
+# This should point to the public location of this yaml file.
+# dashboard_import:
+#   package_import_url: github://esphome/esphome-project-template/project-template-esp32.yaml@v6
+#   import_full_config: false # or true
+
+output:
+  - platform: ledc
+    id: buzzer_output
+    pin: GPIO47
+
+rtttl:
+  output: buzzer_output
+  id: buzzer
+  gain: 100%

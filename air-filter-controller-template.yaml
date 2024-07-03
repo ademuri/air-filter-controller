@@ -42,8 +42,75 @@ output:
   - platform: ledc
     id: buzzer_output
     pin: GPIO47
+  - platform: ledc
+    pin: GPIO48
+    id: fan_pwm0
+    frequency: "20kHz"
+  - platform: ledc
+    pin: GPIO39
+    id: fan_pwm1
+    frequency: "20kHz"
+  - platform: ledc
+    pin:
+      number: GPIO40
+      # LED is specced at 30mA, and there's a 10ohm resistor.
+      drive_strength: "20mA"
+    id: led_g
+    frequency: "20kHz"
+  - platform: ledc
+    pin: GPIO41
+    id: led_r
+    frequency: "20kHz"
+  - platform: ledc
+    pin: GPIO42
+    id: led_b
+    frequency: "20kHz"
 
+# Buzzer
+# https://esphome.io/components/rtttl
 rtttl:
   output: buzzer_output
   id: buzzer
   gain: 100%
+
+# Fan
+# https://esphome.io/components/switch/gpio
+switch:
+  - platform: gpio
+    pin: GPIO21
+    name: "Fan Power"
+    id: fan_power
+
+# https://esphome.io/components/fan/speed
+fan:
+  - platform: speed
+    output: fan_pwm0
+    id: fan_0
+  - platform: speed
+    output: fan_pwm1
+    id: fan_1
+
+# https://esphome.io/components/light/rgb.html
+light:
+  - platform: rgb
+    id: indicator_light
+    name: "Indicator Light"
+    red: led_r
+    green: led_g
+    blue: led_b
+
+# TODO: add BMP280, it's hooked up with SPI but ESPHome only supports it via I2C
+#i2c:
+#  sda: 
+#  scl: GPIO13
+#
+#sensor:
+#  # https://esphome.io/components/sensor/bmp280.html
+#  - platform: bmp280
+#    temperature:
+#      name: "Board Temperature"
+#      oversampling: 16x
+#    pressure:
+#      name: "Board Pressure"
+#      oversampling: 16x
+#    update_interval: 5s

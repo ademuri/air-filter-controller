@@ -24,13 +24,26 @@ esp32:
 
 # To be able to get logs from the device via serial and api.
 logger:
+  level: INFO
 
 # API is a requirement of the dashboard import.
 api:
+  services:
+    - service: play_rtttl
+      variables:
+        song_str: string
+      then:
+        - rtttl.play:
+            rtttl: !lambda 'return song_str;'
 
 # OTA is required for Over-the-Air updating
 ota:
   platform: esphome
+
+safe_mode:
+  # Safe mode not needed for local development.
+  # https://esphome.io/components/safe_mode
+  # disabled: true
 
 # TODO: fill this out or remove it
 # This should point to the public location of this yaml file.
@@ -41,15 +54,22 @@ ota:
 output:
   - platform: ledc
     id: buzzer_output
-    pin: GPIO47
+    pin:
+      number: GPIO47
+      # Buzzer is specced at 50mA, and there's a 47ohm resistor.
+      drive_strength: "40mA"
+    frequency: "6kHz"
+    channel: 2
   - platform: ledc
     pin: GPIO48
     id: fan_pwm0
     frequency: "20kHz"
+    channel: 0
   - platform: ledc
     pin: GPIO39
     id: fan_pwm1
     frequency: "20kHz"
+    channel: 0
   - platform: ledc
     pin:
       number: GPIO40
@@ -57,21 +77,38 @@ output:
       drive_strength: "20mA"
     id: led_g
     frequency: "20kHz"
+    channel: 0
   - platform: ledc
-    pin: GPIO41
+    pin: 
+      number: GPIO41
+      # LED is specced at 30mA, and there's a 10ohm resistor.
+      drive_strength: "20mA"
     id: led_r
     frequency: "20kHz"
+    channel: 0
   - platform: ledc
-    pin: GPIO42
+    pin:
+      number: GPIO42
+      # LED is specced at 30mA, and there's a 10ohm resistor.
+      drive_strength: "20mA"
     id: led_b
     frequency: "20kHz"
+    channel: 0
 
 # Buzzer
 # https://esphome.io/components/rtttl
 rtttl:
   output: buzzer_output
   id: buzzer
-  gain: 100%
+  # Note: this actually sets the duty cycle, so 0.5 is maximum volume
+  gain: 0.5
+
+button:
+  - platform: template
+    name: "Buzzer Chime"
+    on_press:
+      # See https://www.mobilefish.com/tutorials/rtttl/rtttl_quickguide_specification.html
+      - rtttl.play: 'siren:d=8,o=7,b=100:d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e'
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -80,15 +117,33 @@ switch:
     pin: GPIO21
     name: "Fan Power"
     id: fan_power
+  - platform: template
+    name: "Buzzer Continuous"
+    id: buzzer_continuous
+    optimistic: true
+    turn_on_action:
+      then:
+        - output.turn_on: buzzer_output
+        - output.ledc.set_frequency:
+            id: buzzer_output
+            frequency: "3kHz"
+        - output.set_level:
+            id: buzzer_output
+            level: "50%"
+    turn_off_action:
+      then:
+        - output.turn_off: buzzer_output
 
 # https://esphome.io/components/fan/speed
 fan:
   - platform: speed
     output: fan_pwm0
+    name: Fan PWM0
     id: fan_0
   - platform: speed
     output: fan_pwm1
     id: fan_1
+    name: Fan PWM1
 
 # https://esphome.io/components/light/rgb.html
 light:
@@ -98,6 +153,12 @@ light:
     red: led_r
     green: led_g
     blue: led_b
+
+sensor:
+  - platform: pulse_counter
+    pin: GPIO4
+    name: Fan 0 Tach
+    update_interval: 5s
 
 # TODO: add BMP280, it's hooked up with SPI but ESPHome only supports it via I2C
 #i2c:

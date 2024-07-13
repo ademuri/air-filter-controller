@@ -18,13 +18,25 @@ esphome:
     version: "1.0"
 
 esp32:
+  # Note: this board definition uses PSRAM, whereas our module
+  # (ESP32-S3-WROOM-1-N4) does not have PSRAM. But, it seems to work anyway.
   board: adafruit_feather_esp32s3_tft
   framework:
     type: arduino
 
 # To be able to get logs from the device via serial and api.
 logger:
-  level: INFO
+  level: DEBUG
+
+external_components:
+  - source:
+      type: local
+      path: /home/adam/hardware/esphome/esphome/components
+      #type: git
+      #url: https://github.com/ademuri/esphome
+      #ref: dev
+    components: [ bmp280_spi, bmp280_base, bme280_spi, bme280_base ]
+    refresh: 0s
 
 # API is a requirement of the dashboard import.
 api:
@@ -103,12 +115,30 @@ rtttl:
   # Note: this actually sets the duty cycle, so 0.5 is maximum volume
   gain: 0.5
 
+number:
+  - platform: template
+    name: "BMP280 ID"
+    id: bmp280_id
+    step: 1
+    max_value: 255
+    min_value: 0
+    optimistic: true
+
 button:
   - platform: template
     name: "Buzzer Chime"
     on_press:
       # See https://www.mobilefish.com/tutorials/rtttl/rtttl_quickguide_specification.html
       - rtttl.play: 'siren:d=8,o=7,b=100:d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e'
+  - platform: template
+    name: "Read BMP280 ID"
+    on_press:
+      then:
+        - lambda: !lambda |-
+            id(bmp280).enable();
+            id(bmp280).write_byte(0xD0);
+            auto call = id(bmp280_id).make_call();
+            call.set_value(id(bmp280).read_byte());
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -159,19 +189,39 @@ sensor:
     pin: GPIO4
     name: Fan 0 Tach
     update_interval: 5s
+  - platform: pulse_counter
+    pin: GPIO5
+    name: Fan 1 Tach
+    update_interval: 5s
+  - platform: pulse_counter
+    pin: GPIO6
+    name: Fan 2 Tach
+    update_interval: 5s
+  - platform: pulse_counter
+    pin: GPIO7
+    name: Fan 3 Tach
+    update_interval: 5s
 
-# TODO: add BMP280, it's hooked up with SPI but ESPHome only supports it via I2C
-#i2c:
-#  sda: 
-#  scl: GPIO13
-#
-#sensor:
-#  # https://esphome.io/components/sensor/bmp280.html
-#  - platform: bmp280
-#    temperature:
-#      name: "Board Temperature"
-#      oversampling: 16x
-#    pressure:
-#      name: "Board Pressure"
-#      oversampling: 16x
-#    update_interval: 5s
+  # https://esphome.io/components/sensor/bmp280.html
+  #- platform: bmp280_spi
+  #  temperature:
+  #    name: "Board Temperature"
+  #    oversampling: 16x
+  #  pressure:
+  #    name: "Board Pressure"
+  #    oversampling: 16x
+  #  update_interval: 5s
+  #  cs_pin: GPIO16
+
+spi:
+  clk_pin: GPIO13
+  mosi_pin: GPIO14
+  miso_pin: GPIO15
+  interface: hardware
+
+spi_device:
+  id: bmp280
+  cs_pin: GPIO16
+  data_rate: 1MHz
+  mode: 3
+  bit_order: lsb_first

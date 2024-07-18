@@ -1,6 +1,6 @@
 .pio
 .vscode
 
-air-filter-controller.yaml
+air-filter-controller-*.yaml
 .esphome
 

@@ -199,6 +199,14 @@ sensor:
     update_interval: 5s
     cs_pin: GPIO16
 
+  # https://esphome.io/components/sensor/duty_time.html
+  - platform: duty_time
+    id: filter_runtime
+    name: Filter Runtime
+    lambda: "return id(fan_0).state;"
+    update_interval: 30min
+    restore: true
+
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
   # - platform: adc

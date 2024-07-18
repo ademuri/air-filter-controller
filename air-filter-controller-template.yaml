@@ -30,12 +30,10 @@ logger:
 
 external_components:
   - source:
-      type: local
-      path: /home/adam/hardware/esphome/esphome/components
-      #type: git
-      #url: https://github.com/ademuri/esphome
-      #ref: dev
-    components: [ bmp280_spi, bmp280_base, bme280_spi, bme280_base ]
+      type: git
+      url: https://github.com/ademuri/esphome
+      ref: bmp280-spi
+    components: [ bmp280_spi, bmp280_base ]
     refresh: 0s
 
 # API is a requirement of the dashboard import.
@@ -115,30 +113,12 @@ rtttl:
   # Note: this actually sets the duty cycle, so 0.5 is maximum volume
   gain: 0.5
 
-number:
-  - platform: template
-    name: "BMP280 ID"
-    id: bmp280_id
-    step: 1
-    max_value: 255
-    min_value: 0
-    optimistic: true
-
 button:
   - platform: template
     name: "Buzzer Chime"
     on_press:
       # See https://www.mobilefish.com/tutorials/rtttl/rtttl_quickguide_specification.html
       - rtttl.play: 'siren:d=8,o=7,b=100:d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e'
-  - platform: template
-    name: "Read BMP280 ID"
-    on_press:
-      then:
-        - lambda: !lambda |-
-            id(bmp280).enable();
-            id(bmp280).write_byte(0xD0);
-            auto call = id(bmp280_id).make_call();
-            call.set_value(id(bmp280).read_byte());
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -203,25 +183,75 @@ sensor:
     update_interval: 5s
 
   # https://esphome.io/components/sensor/bmp280.html
-  #- platform: bmp280_spi
-  #  temperature:
-  #    name: "Board Temperature"
-  #    oversampling: 16x
-  #  pressure:
-  #    name: "Board Pressure"
-  #    oversampling: 16x
-  #  update_interval: 5s
-  #  cs_pin: GPIO16
+  - platform: bmp280_spi
+    temperature:
+      name: "Board Temperature"
+      oversampling: 16x
+    pressure:
+      name: "Board Pressure"
+      oversampling: 16x
+    update_interval: 5s
+    cs_pin: GPIO16
+
+  # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
+  # TODO: re-enable this once board is revised to use ADC channel 1.
+  # - platform: adc
+  #   pin: GPIO17
+  #   name: "Input Voltage"
+  #   update_interval: 10s
+  #   attenuation: 11dB
+  #   samples: 3
+  #   filters:
+  #     # R1 = 680k, R2 = 220k
+  #     - multiply: 4.0909
 
 spi:
   clk_pin: GPIO13
-  mosi_pin: GPIO14
-  miso_pin: GPIO15
+  mosi_pin: GPIO15
+  miso_pin: GPIO14
   interface: hardware
 
-spi_device:
-  id: bmp280
-  cs_pin: GPIO16
-  data_rate: 1MHz
-  mode: 3
-  bit_order: lsb_first
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO1
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "Filter Button"
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    pin: 
+      number: GPIO2
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "Speed Button"
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    pin: 
+      number: GPIO18
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "SW2 Button"
+    filters:
+      - delayed_off: 10ms
+
+  - platform: gpio
+    pin: 
+      number: GPIO38
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "SW3 Button"
+    filters:
+      - delayed_off: 10ms

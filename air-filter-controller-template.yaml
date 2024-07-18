@@ -75,6 +75,8 @@ output:
     id: fan_pwm0
     frequency: "20kHz"
     channel: 0
+  # Both fan PWM outputs should sync. Using the same LEDC channel means that
+  # they will implicitly.
   - platform: ledc
     pin: GPIO39
     id: fan_pwm1
@@ -87,7 +89,7 @@ output:
       drive_strength: "20mA"
     id: led_g
     frequency: "20kHz"
-    channel: 0
+    channel: 1
   - platform: ledc
     pin: 
       number: GPIO41
@@ -95,7 +97,7 @@ output:
       drive_strength: "20mA"
     id: led_r
     frequency: "20kHz"
-    channel: 0
+    channel: 4
   - platform: ledc
     pin:
       number: GPIO42
@@ -103,7 +105,7 @@ output:
       drive_strength: "20mA"
     id: led_b
     frequency: "20kHz"
-    channel: 0
+    channel: 5
 
 # Buzzer
 # https://esphome.io/components/rtttl
@@ -127,6 +129,7 @@ switch:
     pin: GPIO21
     name: "Fan Power"
     id: fan_power
+    internal: true
   - platform: template
     name: "Buzzer Continuous"
     id: buzzer_continuous
@@ -148,12 +151,15 @@ switch:
 fan:
   - platform: speed
     output: fan_pwm0
-    name: Fan PWM0
+    name: Fan PWM
     id: fan_0
-  - platform: speed
-    output: fan_pwm1
-    id: fan_1
-    name: Fan PWM1
+    restore_mode: RESTORE_DEFAULT_ON
+    on_turn_on:
+      then:
+        - switch.turn_on: fan_power
+    on_turn_off:
+      then:
+        - switch.turn_off: fan_power
 
 # https://esphome.io/components/light/rgb.html
 light:
@@ -189,7 +195,7 @@ sensor:
       oversampling: 16x
     pressure:
       name: "Board Pressure"
-      oversampling: 16x
+      oversampling: 2x
     update_interval: 5s
     cs_pin: GPIO16
 

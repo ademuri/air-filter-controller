@@ -220,9 +220,13 @@ sensor:
     update_interval: 60s
 
   - platform: template
-    name: "Filter Drop, Pascals"
+    name: "Filter Pressure Drop"
     id: filter_pressure_change
     update_interval: never
+    unit_of_measurement: "Pa"
+    accuracy_decimals: 2
+    state_class: "measurement"
+
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
@@ -308,6 +312,5 @@ script:
       - sensor.template.publish:
           id: filter_pressure_change
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
-      - lambda: "id(filter_pressure_change).set_accuracy_decimals(2);"
       - sensor.duty_time.reset: last_filter_check
       - sensor.duty_time.start: last_filter_check

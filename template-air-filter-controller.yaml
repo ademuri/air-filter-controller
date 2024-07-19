@@ -121,6 +121,10 @@ button:
     on_press:
       # See https://www.mobilefish.com/tutorials/rtttl/rtttl_quickguide_specification.html
       - rtttl.play: 'siren:d=8,o=7,b=100:d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e'
+  - platform: template
+    name: "Check Filter"
+    on_press:
+      - script.execute: check_filter
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -190,12 +194,15 @@ sensor:
 
   # https://esphome.io/components/sensor/bmp280.html
   - platform: bmp280_spi
+    id: bmp280
     temperature:
       name: "Board Temperature"
       oversampling: 16x
+      id: bmp280_temperature
     pressure:
       name: "Board Pressure"
-      oversampling: 2x
+      oversampling: 16x
+      id: bmp280_pressure
     update_interval: 5s
     cs_pin: GPIO16
 
@@ -206,6 +213,16 @@ sensor:
     lambda: "return id(fan_0).state;"
     update_interval: 30min
     restore: true
+
+  - platform: duty_time
+    id: last_filter_check
+    name: Time Since Filter Check
+    update_interval: 60s
+
+  - platform: template
+    name: "Filter Drop, Pascals"
+    id: filter_pressure_change
+    update_interval: never
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
@@ -269,3 +286,28 @@ binary_sensor:
     name: "SW3 Button"
     filters:
       - delayed_off: 10ms
+
+number:
+
+globals:
+  - id: pressure_before
+    type: float
+
+script:
+  - id: check_filter
+    mode: single
+    then:
+      - fan.turn_off: fan_0
+      - delay: 15s
+      - globals.set:
+          id: pressure_before
+          value: !lambda "return id(bmp280_pressure).state;"
+      - fan.turn_on: fan_0
+      - lambda: "id(fan_0).make_call().set_speed(100).perform();"
+      - delay: 15s
+      - sensor.template.publish:
+          id: filter_pressure_change
+          state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
+      - lambda: "id(filter_pressure_change).set_accuracy_decimals(2);"
+      - sensor.duty_time.reset: last_filter_check
+      - sensor.duty_time.start: last_filter_check

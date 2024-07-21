@@ -125,6 +125,14 @@ button:
     name: "Check Filter"
     on_press:
       - script.execute: check_filter
+  - platform: template
+    name: "Check Filter With Log"
+    on_press:
+      - script.execute: check_filter_with_log
+  - platform: template
+    name: "Log Pressure Changes"
+    on_press:
+      - script.execute: log_pressure_change
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -227,6 +235,14 @@ sensor:
     accuracy_decimals: 2
     state_class: "measurement"
 
+  - platform: template
+    name: "Filter Pressure Instantaneous"
+    id: filter_pressure_instantaneous
+    update_interval: never
+    unit_of_measurement: "Pa"
+    accuracy_decimals: 2
+    state_class: "measurement"
+
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
@@ -296,6 +312,8 @@ number:
 globals:
   - id: pressure_before
     type: float
+  - id: pressure_log_temp
+    type: float
 
 script:
   - id: check_filter
@@ -314,3 +332,62 @@ script:
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
       - sensor.duty_time.reset: last_filter_check
       - sensor.duty_time.start: last_filter_check
+
+  - id: check_filter_with_log
+    mode: single
+    then:
+      - fan.turn_off: fan_0
+      - globals.set:
+          id: pressure_log_temp
+          value: !lambda "return id(bmp280_pressure).state;"
+
+      - repeat:
+          count: 30
+          then:
+            - sensor.template.publish:
+                id: filter_pressure_instantaneous
+                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
+            - delay: 1s
+
+      - globals.set:
+          id: pressure_before
+          value: !lambda "return id(bmp280_pressure).state;"
+
+      - fan.turn_on: fan_0
+      - lambda: "id(fan_0).make_call().set_speed(100).perform();"
+
+      - globals.set:
+          id: pressure_log_temp
+          value: !lambda "return id(bmp280_pressure).state;"
+      - repeat:
+          count: 30
+          then:
+            - sensor.template.publish:
+                id: filter_pressure_instantaneous
+                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
+            - delay: 1s
+
+      - sensor.template.publish:
+          id: filter_pressure_instantaneous
+          state: 0
+      - sensor.template.publish:
+          id: filter_pressure_change
+          state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
+      - sensor.duty_time.reset: last_filter_check
+      - sensor.duty_time.start: last_filter_check
+      
+  - id: log_pressure_change
+    then:
+      - globals.set:
+          id: pressure_log_temp
+          value: !lambda "return id(bmp280_pressure).state;"
+      - repeat:
+          count: 60
+          then:
+            - sensor.template.publish:
+                id: filter_pressure_instantaneous
+                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
+            - delay: 1s
+      - sensor.template.publish:
+          id: filter_pressure_instantaneous
+          state: 0

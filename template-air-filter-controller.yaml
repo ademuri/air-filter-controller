@@ -211,7 +211,9 @@ sensor:
       name: "Board Pressure"
       oversampling: 16x
       id: bmp280_pressure
-    update_interval: 5s
+      disabled_by_default: true
+    update_interval: 5min
+    iir_filter: 8x
     cs_pin: GPIO16
 
   # https://esphome.io/components/sensor/duty_time.html
@@ -242,7 +244,8 @@ sensor:
     unit_of_measurement: "Pa"
     accuracy_decimals: 2
     state_class: "measurement"
-
+    disabled_by_default: true
+    
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
@@ -320,13 +323,23 @@ script:
     mode: single
     then:
       - fan.turn_off: fan_0
-      - delay: 15s
+      # Delay for 30 seconds, updating the sensor every second
+      - repeat:
+          count: 30
+          then:
+            - component.update: bmp280
+            - delay: 1s
       - globals.set:
           id: pressure_before
           value: !lambda "return id(bmp280_pressure).state;"
       - fan.turn_on: fan_0
       - lambda: "id(fan_0).make_call().set_speed(100).perform();"
-      - delay: 15s
+      # Delay for 30 seconds, updating the sensor every second
+      - repeat:
+          count: 30
+          then:
+            - component.update: bmp280
+            - delay: 1s
       - sensor.template.publish:
           id: filter_pressure_change
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
@@ -344,6 +357,7 @@ script:
       - repeat:
           count: 30
           then:
+            - component.update: bmp280
             - sensor.template.publish:
                 id: filter_pressure_instantaneous
                 state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
@@ -362,6 +376,7 @@ script:
       - repeat:
           count: 30
           then:
+            - component.update: bmp280
             - sensor.template.publish:
                 id: filter_pressure_instantaneous
                 state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
@@ -375,6 +390,7 @@ script:
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
       - sensor.duty_time.reset: last_filter_check
       - sensor.duty_time.start: last_filter_check
+      - rtttl.play: 'beep:d=1,o=7,b=100:c'
       
   - id: log_pressure_change
     then:
@@ -391,3 +407,4 @@ script:
       - sensor.template.publish:
           id: filter_pressure_instantaneous
           state: 0
+      - rtttl.play: 'beep:d=1,o=7,b=100:c'

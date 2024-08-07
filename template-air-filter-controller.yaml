@@ -231,7 +231,7 @@ sensor:
   - platform: duty_time
     id: last_filter_check
     name: Time Since Filter Check
-    update_interval: 60s
+    update_interval: 5min
 
   - platform: template
     name: "Filter Pressure Drop"

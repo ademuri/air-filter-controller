@@ -187,18 +187,22 @@ sensor:
     pin: GPIO4
     name: Fan 0 Tach
     update_interval: 5s
+    id: fan_0_tach
   - platform: pulse_counter
     pin: GPIO5
     name: Fan 1 Tach
     update_interval: 5s
+    id: fan_1_tach
   - platform: pulse_counter
     pin: GPIO6
     name: Fan 2 Tach
     update_interval: 5s
+    id: fan_2_tach
   - platform: pulse_counter
     pin: GPIO7
     name: Fan 3 Tach
     update_interval: 5s
+    id: fan_3_tach
 
   # https://esphome.io/components/sensor/bmp280.html
   - platform: bmp280_spi
@@ -235,6 +239,14 @@ sensor:
     update_interval: never
     unit_of_measurement: "Pa"
     accuracy_decimals: 2
+    state_class: "measurement"
+
+  - platform: template
+    name: "Max Tach"
+    id: max_tach
+    update_interval: never
+    unit_of_measurement: "RPM"
+    accuracy_decimals: 0
     state_class: "measurement"
 
   - platform: template
@@ -317,11 +329,21 @@ globals:
     type: float
   - id: pressure_log_temp
     type: float
+  - id: saved_fan_speed
+    type: float
+  - id: saved_fan_state
+    type: boolean
 
 script:
   - id: check_filter
     mode: single
     then:
+      - globals.set:
+          id: saved_fan_speed
+          value: !lambda "return id(fan_0).speed;"
+      - globals.set:
+          id: saved_fan_state
+          value: !lambda "return id(fan_power).state;"
       - fan.turn_off: fan_0
       # Delay for 30 seconds, updating the sensor every second
       - repeat:
@@ -343,8 +365,15 @@ script:
       - sensor.template.publish:
           id: filter_pressure_change
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
+      - sensor.template.publish:
+          id: max_tach
+          state: !lambda "return (id(fan_0_tach).state + id(fan_1_tach).state + id(fan_2_tach).state + id(fan_3_tach).state) / 4;"
       - sensor.duty_time.reset: last_filter_check
       - sensor.duty_time.start: last_filter_check
+      - lambda: |-
+          auto call = id(fan_0).make_call().set_speed(id(saved_fan_speed));
+          call.set_state(id(saved_fan_state));
+          call.perform();
 
   - id: check_filter_with_log
     mode: single
@@ -388,6 +417,9 @@ script:
       - sensor.template.publish:
           id: filter_pressure_change
           state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
+      - sensor.template.publish:
+          id: max_tach
+          state: !lambda "return (id(fan_0_tach).state + id(fan_1_tach).state + id(fan_2_tach).state + id(fan_3_tach).state) / 4;"
       - sensor.duty_time.reset: last_filter_check
       - sensor.duty_time.start: last_filter_check
       - rtttl.play: 'beep:d=1,o=7,b=100:c'

@@ -299,6 +299,21 @@ binary_sensor:
     name: "Speed Button"
     filters:
       - delayed_off: 10ms
+    on_press:
+      then:
+        lambda: |-
+            id(fan_speed_toggle) = (id(fan_speed_toggle) + 1) % 3;
+            switch (id(fan_speed_toggle)) {
+              case 0:
+                id(fan_0).make_call().set_speed(60).perform();
+                break;
+              case 1:
+                id(fan_0).make_call().set_speed(80).perform();
+                break;
+              case 2:
+                id(fan_0).make_call().set_speed(100).perform();
+                break;
+            }
 
   - platform: gpio
     pin: 
@@ -333,6 +348,9 @@ globals:
     type: float
   - id: saved_fan_state
     type: boolean
+  - id: fan_speed_toggle
+    type: int
+    initial_value: '0'
 
 script:
   - id: check_filter

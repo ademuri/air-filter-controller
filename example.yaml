@@ -1,0 +1,28 @@
+substitutions:
+  name: air-filter-controller-my_name
+  friendly_name: "Air Filter Controller: My Name"
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  - platform: esphome
+    password: ""
+
+wifi:
+  ssid: "Your SSID"
+  password: "Your Password" 
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Air-Filter-Controller"
+    password: "<some random value>"
+
+captive_portal:
+    
+<<: !include ./template-air-filter-controller.yaml
+

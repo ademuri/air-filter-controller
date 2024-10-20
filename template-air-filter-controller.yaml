@@ -183,6 +183,40 @@ sensor:
     name: Fan 3 Tach
     update_interval: 5s
     id: fan_3_tach
+  - platform: pulse_counter
+    pin: GPIO8
+    name: Fan 4 Tach
+    update_interval: 5s
+    id: fan_4_tach
+    use_pcnt: false
+  - platform: pulse_counter
+    pin: GPIO9
+    name: Fan 5 Tach
+    update_interval: 5s
+    id: fan_5_tach
+    use_pcnt: false
+    disabled_by_default: true
+  - platform: pulse_counter
+    pin: GPIO10
+    name: Fan 6 Tach
+    update_interval: 5s
+    id: fan_6_tach
+    use_pcnt: false
+    disabled_by_default: true
+  - platform: pulse_counter
+    pin: GPIO11
+    name: Fan 7 Tach
+    update_interval: 5s
+    id: fan_7_tach
+    use_pcnt: false
+    disabled_by_default: true
+  - platform: pulse_counter
+    pin: GPIO12
+    name: Fan 8 Tach
+    update_interval: 5s
+    id: fan_8_tach
+    use_pcnt: false
+    disabled_by_default: true
 
   # https://esphome.io/components/sensor/duty_time.html
   - platform: duty_time
@@ -256,27 +290,27 @@ binary_sensor:
                 break;
             }
 
-  #- platform: gpio
-  #  pin: 
-  #    number: GPIO18
-  #    inverted: true
-  #    mode:
-  #      input: true
-  #      pullup: true
-  #  name: "SW2 Button"
-  #  filters:
-  #    - delayed_off: 10ms
+  - platform: gpio
+    pin: 
+      number: GPIO18
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "SW2 Button"
+    filters:
+      - delayed_off: 10ms
 
-  #- platform: gpio
-  #  pin: 
-  #    number: GPIO38
-  #    inverted: true
-  #    mode:
-  #      input: true
-  #      pullup: true
-  #  name: "SW3 Button"
-  #  filters:
-  #    - delayed_off: 10ms
+  - platform: gpio
+    pin: 
+      number: GPIO38
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "SW3 Button"
+    filters:
+      - delayed_off: 10ms
 
 globals:
   - id: fan_speed_toggle

@@ -28,14 +28,6 @@ esp32:
 logger:
   level: DEBUG
 
-external_components:
-  - source:
-      type: git
-      url: https://github.com/ademuri/esphome
-      ref: bmp280-spi
-    components: [ bmp280_spi, bmp280_base ]
-    refresh: 0s
-
 # API is a requirement of the dashboard import.
 api:
   services:
@@ -121,18 +113,6 @@ button:
     on_press:
       # See https://www.mobilefish.com/tutorials/rtttl/rtttl_quickguide_specification.html
       - rtttl.play: 'siren:d=8,o=7,b=100:d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e,d,e'
-  - platform: template
-    name: "Check Filter"
-    on_press:
-      - script.execute: check_filter
-  - platform: template
-    name: "Check Filter With Log"
-    on_press:
-      - script.execute: check_filter_with_log
-  - platform: template
-    name: "Log Pressure Changes"
-    on_press:
-      - script.execute: log_pressure_change
 
 # Fan
 # https://esphome.io/components/switch/gpio
@@ -204,22 +184,6 @@ sensor:
     update_interval: 5s
     id: fan_3_tach
 
-  # https://esphome.io/components/sensor/bmp280.html
-  - platform: bmp280_spi
-    id: bmp280
-    temperature:
-      name: "Board Temperature"
-      oversampling: 16x
-      id: bmp280_temperature
-    pressure:
-      name: "Board Pressure"
-      oversampling: 16x
-      id: bmp280_pressure
-      disabled_by_default: true
-    update_interval: 5min
-    iir_filter: 8x
-    cs_pin: GPIO16
-
   # https://esphome.io/components/sensor/duty_time.html
   - platform: duty_time
     id: filter_runtime
@@ -228,19 +192,6 @@ sensor:
     update_interval: 30min
     restore: true
 
-  - platform: duty_time
-    id: last_filter_check
-    name: Time Since Filter Check
-    update_interval: 5min
-
-  - platform: template
-    name: "Filter Pressure Drop"
-    id: filter_pressure_change
-    update_interval: never
-    unit_of_measurement: "Pa"
-    accuracy_decimals: 2
-    state_class: "measurement"
-
   - platform: template
     name: "Max Tach"
     id: max_tach
@@ -248,16 +199,6 @@ sensor:
     unit_of_measurement: "RPM"
     accuracy_decimals: 0
     state_class: "measurement"
-
-  - platform: template
-    name: "Filter Pressure Instantaneous"
-    id: filter_pressure_instantaneous
-    update_interval: never
-    unit_of_measurement: "Pa"
-    accuracy_decimals: 2
-    state_class: "measurement"
-    disabled_by_default: true
-    
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
@@ -315,146 +256,29 @@ binary_sensor:
                 break;
             }
 
-  - platform: gpio
-    pin: 
-      number: GPIO18
-      inverted: true
-      mode:
-        input: true
-        pullup: true
-    name: "SW2 Button"
-    filters:
-      - delayed_off: 10ms
+  #- platform: gpio
+  #  pin: 
+  #    number: GPIO18
+  #    inverted: true
+  #    mode:
+  #      input: true
+  #      pullup: true
+  #  name: "SW2 Button"
+  #  filters:
+  #    - delayed_off: 10ms
 
-  - platform: gpio
-    pin: 
-      number: GPIO38
-      inverted: true
-      mode:
-        input: true
-        pullup: true
-    name: "SW3 Button"
-    filters:
-      - delayed_off: 10ms
-
-number:
+  #- platform: gpio
+  #  pin: 
+  #    number: GPIO38
+  #    inverted: true
+  #    mode:
+  #      input: true
+  #      pullup: true
+  #  name: "SW3 Button"
+  #  filters:
+  #    - delayed_off: 10ms
 
 globals:
-  - id: pressure_before
-    type: float
-  - id: pressure_log_temp
-    type: float
-  - id: saved_fan_speed
-    type: float
-  - id: saved_fan_state
-    type: boolean
   - id: fan_speed_toggle
     type: int
     initial_value: '0'
-
-script:
-  - id: check_filter
-    mode: single
-    then:
-      - globals.set:
-          id: saved_fan_speed
-          value: !lambda "return id(fan_0).speed;"
-      - globals.set:
-          id: saved_fan_state
-          value: !lambda "return id(fan_power).state;"
-      - fan.turn_off: fan_0
-      # Delay for 30 seconds, updating the sensor every second
-      - repeat:
-          count: 30
-          then:
-            - component.update: bmp280
-            - delay: 1s
-      - globals.set:
-          id: pressure_before
-          value: !lambda "return id(bmp280_pressure).state;"
-      - fan.turn_on: fan_0
-      - lambda: "id(fan_0).make_call().set_speed(100).perform();"
-      # Delay for 30 seconds, updating the sensor every second
-      - repeat:
-          count: 30
-          then:
-            - component.update: bmp280
-            - delay: 1s
-      - sensor.template.publish:
-          id: filter_pressure_change
-          state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
-      - sensor.template.publish:
-          id: max_tach
-          state: !lambda "return (id(fan_0_tach).state + id(fan_1_tach).state + id(fan_2_tach).state + id(fan_3_tach).state) / 4;"
-      - sensor.duty_time.reset: last_filter_check
-      - sensor.duty_time.start: last_filter_check
-      - lambda: |-
-          auto call = id(fan_0).make_call().set_speed(id(saved_fan_speed));
-          call.set_state(id(saved_fan_state));
-          call.perform();
-
-  - id: check_filter_with_log
-    mode: single
-    then:
-      - fan.turn_off: fan_0
-      - globals.set:
-          id: pressure_log_temp
-          value: !lambda "return id(bmp280_pressure).state;"
-
-      - repeat:
-          count: 30
-          then:
-            - component.update: bmp280
-            - sensor.template.publish:
-                id: filter_pressure_instantaneous
-                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
-            - delay: 1s
-
-      - globals.set:
-          id: pressure_before
-          value: !lambda "return id(bmp280_pressure).state;"
-
-      - fan.turn_on: fan_0
-      - lambda: "id(fan_0).make_call().set_speed(100).perform();"
-
-      - globals.set:
-          id: pressure_log_temp
-          value: !lambda "return id(bmp280_pressure).state;"
-      - repeat:
-          count: 30
-          then:
-            - component.update: bmp280
-            - sensor.template.publish:
-                id: filter_pressure_instantaneous
-                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
-            - delay: 1s
-
-      - sensor.template.publish:
-          id: filter_pressure_instantaneous
-          state: 0
-      - sensor.template.publish:
-          id: filter_pressure_change
-          state: !lambda "return (id(pressure_before) - id(bmp280_pressure).state) * 100;"
-      - sensor.template.publish:
-          id: max_tach
-          state: !lambda "return (id(fan_0_tach).state + id(fan_1_tach).state + id(fan_2_tach).state + id(fan_3_tach).state) / 4;"
-      - sensor.duty_time.reset: last_filter_check
-      - sensor.duty_time.start: last_filter_check
-      - rtttl.play: 'beep:d=1,o=7,b=100:c'
-      
-  - id: log_pressure_change
-    then:
-      - globals.set:
-          id: pressure_log_temp
-          value: !lambda "return id(bmp280_pressure).state;"
-      - repeat:
-          count: 60
-          then:
-            - sensor.template.publish:
-                id: filter_pressure_instantaneous
-                state: !lambda "return (id(pressure_log_temp) - id(bmp280_pressure).state) * 100;"
-            - delay: 1s
-      - sensor.template.publish:
-          id: filter_pressure_instantaneous
-          state: 0
-      - rtttl.play: 'beep:d=1,o=7,b=100:c'

@@ -1,5 +1,5 @@
 substitutions:
-  name: air-filter-controller-my_name
+  name: air-filter-controller-my-name
   friendly_name: "Air Filter Controller: My Name"
   num_fans: '5'
   min_tach_alarm_light_threshold: "1000"

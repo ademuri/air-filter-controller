@@ -17,6 +17,11 @@ esphome:
     name: esphome.air-filter-controller-template
     version: "1.0"
 
+  on_boot:
+    priority: -100.0
+    then:
+      - script.execute: update_min_tach
+
 esp32:
   # Note: this board definition uses PSRAM, whereas our module
   # (ESP32-S3-WROOM-1-N4) does not have PSRAM. But, it seems to work anyway.
@@ -168,27 +173,32 @@ sensor:
     name: Fan 0 Tach
     update_interval: 5s
     id: fan_0_tach
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO5
     name: Fan 1 Tach
     update_interval: 5s
     id: fan_1_tach
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO6
     name: Fan 2 Tach
     update_interval: 5s
     id: fan_2_tach
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO7
     name: Fan 3 Tach
     update_interval: 5s
     id: fan_3_tach
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO8
     name: Fan 4 Tach
     update_interval: 5s
     id: fan_4_tach
     use_pcnt: false
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO9
     name: Fan 5 Tach
@@ -196,6 +206,7 @@ sensor:
     id: fan_5_tach
     use_pcnt: false
     disabled_by_default: true
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO10
     name: Fan 6 Tach
@@ -203,6 +214,7 @@ sensor:
     id: fan_6_tach
     use_pcnt: false
     disabled_by_default: true
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO11
     name: Fan 7 Tach
@@ -210,6 +222,7 @@ sensor:
     id: fan_7_tach
     use_pcnt: false
     disabled_by_default: true
+    accuracy_decimals: 0
   - platform: pulse_counter
     pin: GPIO12
     name: Fan 8 Tach
@@ -217,6 +230,7 @@ sensor:
     id: fan_8_tach
     use_pcnt: false
     disabled_by_default: true
+    accuracy_decimals: 0
 
   # https://esphome.io/components/sensor/duty_time.html
   - platform: duty_time
@@ -227,8 +241,8 @@ sensor:
     restore: true
 
   - platform: template
-    name: "Max Tach"
-    id: max_tach
+    name: "Min Tach"
+    id: min_tach
     update_interval: never
     unit_of_measurement: "RPM"
     accuracy_decimals: 0
@@ -316,3 +330,25 @@ globals:
   - id: fan_speed_toggle
     type: int
     initial_value: '0'
+  - id: num_fans
+    type: int
+    initial_value: ${num_fans}
+
+script:
+  - id: update_min_tach
+    then:
+      - while:
+          condition:
+            lambda: |-
+              return true;
+          then:
+          - lambda: |-
+              int minValue = 65535;
+              std::vector<pulse_counter::PulseCounterSensor*> tachs = {fan_0_tach, fan_1_tach, fan_2_tach, fan_3_tach, fan_4_tach, fan_5_tach, fan_6_tach, fan_7_tach, fan_8_tach};
+              for (uint8_t i = 0; i < id(num_fans) && i < tachs.size(); i++) {
+                if (id(tachs[i]).state < minValue) {
+                  minValue = id(tachs[i]).state;
+                }
+              }
+              id(min_tach).publish_state(minValue);
+          - delay: 5s

@@ -1,6 +1,7 @@
 substitutions:
   name: air-filter-controller-my_name
   friendly_name: "Air Filter Controller: My Name"
+  num_fans: '5'
 
 # Enable logging
 logger:

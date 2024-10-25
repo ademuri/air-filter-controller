@@ -133,13 +133,7 @@ switch:
     optimistic: true
     turn_on_action:
       then:
-        - output.turn_on: buzzer_output
-        - output.ledc.set_frequency:
-            id: buzzer_output
-            frequency: "3kHz"
-        - output.set_level:
-            id: buzzer_output
-            level: "50%"
+        - script.execute: turn_on_buzzer
     turn_off_action:
       then:
         - output.turn_off: buzzer_output
@@ -157,6 +151,7 @@ fan:
     on_turn_off:
       then:
         - switch.turn_off: fan_power
+        - sensor.duty_time.reset: filter_runtime_internal
 
 # https://esphome.io/components/light/rgb.html
 light:
@@ -240,8 +235,15 @@ sensor:
     update_interval: 30min
     restore: true
 
+  - platform: duty_time
+    name: Filter Runtime Internal
+    id: filter_runtime_internal
+    lambda: "return id(fan_0).state;"
+    update_interval: 5s
+    internal: true
+
   - platform: template
-    name: "Min Tach"
+    name: Min Tach
     id: min_tach
     update_interval: never
     unit_of_measurement: "RPM"
@@ -326,6 +328,10 @@ binary_sensor:
     filters:
       - delayed_off: 10ms
 
+  - platform: template
+    name: Min Tach Alarm
+    id: min_tach_alarm
+
 globals:
   - id: fan_speed_toggle
     type: int
@@ -333,8 +339,29 @@ globals:
   - id: num_fans
     type: int
     initial_value: ${num_fans}
+  - id: min_tach_alarm_light_threshold
+    type: int
+    initial_value: ${min_tach_alarm_light_threshold}
+  - id: min_tach_alarm_sound_threshold
+    type: int
+    initial_value: ${min_tach_alarm_sound_threshold}
 
 script:
+  - id: turn_on_buzzer
+    then:
+      - output.turn_on: buzzer_output
+      - output.ledc.set_frequency:
+          id: buzzer_output
+          frequency: "3kHz"
+      - output.set_level:
+          id: buzzer_output
+          level: "50%"
+  - id: turn_off_buzzer
+    then:
+      - switch.template.publish:
+          id: buzzer_continuous
+          state: OFF
+      - output.turn_off: buzzer_output
   - id: update_min_tach
     then:
       - while:
@@ -351,4 +378,52 @@ script:
                 }
               }
               id(min_tach).publish_state(minValue);
+          - if:
+              condition:
+                lambda: 'return id(fan_0).state && id(filter_runtime_internal).state > 10;'
+              then:
+                - if:
+                    condition:
+                      lambda: 'return id(min_tach).state < id(min_tach_alarm_light_threshold);'
+                    then:
+                      - light.turn_on:
+                          id: indicator_light
+                          brightness: 100%
+                          red: 100%
+                          green: 0%
+                          blue: 0%
+                      - binary_sensor.template.publish:
+                          id: min_tach_alarm
+                          state: ON
+                    else:
+                      # If light is already on (red), set it to orange
+                      - if:
+                          condition:
+                            light.is_on: indicator_light
+                          then:
+                            - light.turn_on:
+                                id: indicator_light
+                                brightness: 100%
+                                red: 100%
+                                green: 50%
+                                blue: 0%
+                      - binary_sensor.template.publish:
+                          id: min_tach_alarm
+                          state: OFF
+                - if:
+                    condition:
+                      lambda: 'return id(min_tach).state < id(min_tach_alarm_sound_threshold);'
+                    then:
+                      - switch.template.publish:
+                          id: buzzer_continuous
+                          state: ON
+                      - script.execute: turn_on_buzzer
+                    else:
+                      - script.execute: turn_off_buzzer
+              else: # Fan off or not yet running for 10s
+                - script.execute: turn_off_buzzer
+                - binary_sensor.template.publish:
+                    id: min_tach_alarm
+                    state: OFF
+
           - delay: 5s

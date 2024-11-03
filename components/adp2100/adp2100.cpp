@@ -7,16 +7,7 @@ namespace esphome::adp2100 {
 
 using ErrorCode = ::esphome::i2c::ErrorCode;
 
-static const uint8_t STATUS_BIT_POWER = 6;
-static const uint8_t STATUS_BIT_BUSY = 5;
-static const uint8_t STATUS_BIT_ERROR = 2;
-static const uint8_t STATUS_MATH_SAT = 0;
-
 static const char *const TAG = "adp2100";
-
-float ADP2100Sensor::get_pressure() { return this->last_pressure_; }
-
-float ADP2100Sensor::get_temperature() { return this->last_temperature_; }
 
 void ADP2100Sensor::setup() {
   ESP_LOGI(TAG, "Setup ADP2100 Sensor");
@@ -31,7 +22,7 @@ void ADP2100Sensor::setup() {
   }
 
   assert(kDataLength >= 3);
-  error = this->read(data_, 3);
+  error = this->read(data_.data(), 3);
   if (error != ErrorCode::NO_ERROR) {
     ESP_LOGE(TAG, "Error reading product type");
     this->mark_failed();
@@ -62,7 +53,7 @@ void ADP2100Sensor::update() {
   }
 
   assert(kDataLength >= 6);
-  error = this->read(data_, 6);
+  error = this->read(data_.data(), 6);
   if (error != ErrorCode::NO_ERROR) {
     ESP_LOGE(TAG, "Error reading continuous measurement data");
   }

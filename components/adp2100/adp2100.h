@@ -5,6 +5,8 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
+#include <array>
+
 namespace esphome::adp2100 {
 
 class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
@@ -21,9 +23,6 @@ class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
   float get_setup_priority() const override { return setup_priority::DATA; };
   void dump_config() override;
 
-  float get_pressure();
-  float get_temperature();
-
  protected:
   sensor::Sensor *pressure_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
@@ -34,10 +33,7 @@ class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
       0x36, 0x1E};
 
   static constexpr uint8_t kDataLength = 6;
-  uint8_t data_[kDataLength];
-
-  float last_pressure_;
-  float last_temperature_;
+  std::array<uint8_t, kDataLength> data_;
 
   enum class SetupStatus {
     SUCCESS,
@@ -46,6 +42,7 @@ class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
     INCORRECT_PRODUCT_TYPE
   };
   SetupStatus setup_status_;
+
   i2c::ErrorCode i2c_error_code_;
 };
 

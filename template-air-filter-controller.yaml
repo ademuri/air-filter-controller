@@ -22,6 +22,11 @@ esphome:
     then:
       - script.execute: update_min_tach
 
+external_components:
+  - source:
+      type: local
+      path: components
+
 esp32:
   # Note: this board definition uses PSRAM, whereas our module
   # (ESP32-S3-WROOM-1-N4) does not have PSRAM. But, it seems to work anyway.
@@ -32,6 +37,8 @@ esp32:
 # To be able to get logs from the device via serial and api.
 logger:
   level: DEBUG
+  logs:
+    adp2100: VERY_VERBOSE
 
 # API is a requirement of the dashboard import.
 api:
@@ -50,7 +57,9 @@ ota:
 safe_mode:
   # Safe mode not needed for local development.
   # https://esphome.io/components/safe_mode
-  # disabled: true
+  disabled: false
+  #boot_is_good_after: 40s
+  #reboot_timeout: 1min
 
 # TODO: fill this out or remove it
 # This should point to the public location of this yaml file.
@@ -262,11 +271,25 @@ sensor:
   #     # R1 = 680k, R2 = 220k
   #     - multiply: 4.0909
 
+  - platform: adp2100
+    id: adp2100_sensor
+    update_interval: 5s
+    pressure:
+      id: pressure_drop
+      name: Filter Pressure Drop
+      unit_of_measurement: "Pa"
+
 spi:
   clk_pin: GPIO13
   mosi_pin: GPIO15
   miso_pin: GPIO14
   interface: hardware
+
+i2c:
+  sda: GPIO38
+  scl: GPIO18
+  scan: true
+  frequency: 100kHz
 
 binary_sensor:
   - platform: gpio
@@ -306,27 +329,27 @@ binary_sensor:
                 break;
             }
 
-  - platform: gpio
-    pin: 
-      number: GPIO18
-      inverted: true
-      mode:
-        input: true
-        pullup: true
-    name: "SW2 Button"
-    filters:
-      - delayed_off: 10ms
+  #- platform: gpio
+  #  pin: 
+  #    number: GPIO18
+  #    inverted: true
+  #    mode:
+  #      input: true
+  #      pullup: true
+  #  name: "SW2 Button"
+  #  filters:
+  #    - delayed_off: 10ms
 
-  - platform: gpio
-    pin: 
-      number: GPIO38
-      inverted: true
-      mode:
-        input: true
-        pullup: true
-    name: "SW3 Button"
-    filters:
-      - delayed_off: 10ms
+  #- platform: gpio
+  #  pin: 
+  #    number: GPIO38
+  #    inverted: true
+  #    mode:
+  #      input: true
+  #      pullup: true
+  #  name: "SW3 Button"
+  #  filters:
+  #    - delayed_off: 10ms
 
   - platform: template
     name: Min Tach Alarm

@@ -4,3 +4,5 @@
 air-filter-controller-*.yaml
 .esphome
 
+*.pyc
+

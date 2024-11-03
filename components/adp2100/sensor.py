@@ -10,6 +10,7 @@ from esphome.const import (
     DEVICE_CLASS_TEMPERATURE,
     STATE_CLASS_MEASUREMENT,
     UNIT_CELSIUS,
+    UNIT_PASCAL,
 )
 
 DEPENDENCIES = ["i2c"]
@@ -25,7 +26,7 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(ADP2100Sensor),
             cv.Optional(CONF_PRESSURE): sensor.sensor_schema(
-                unit_of_measurement="Pa",
+                unit_of_measurement=UNIT_PASCAL,
                 accuracy_decimals=2,
                 device_class=DEVICE_CLASS_PRESSURE,
                 state_class=STATE_CLASS_MEASUREMENT,

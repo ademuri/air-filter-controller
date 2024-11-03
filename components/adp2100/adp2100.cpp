@@ -31,7 +31,16 @@ void ADP2100Sensor::setup() {
     return;
   }
 
-  // TODO: verify CRC
+  uint8_t expected_crc = CalculateCRC(data_.data(), 2);
+  if (data_[2] != expected_crc) {
+    ESP_LOGE(TAG, "Product type CRC check failed. Expected: 0x%2X, got: 0x%2X",
+             expected_crc, data_[2]);
+    this->mark_failed();
+    setup_status_ = SetupStatus::PRODUCT_TYPE_CRC_FAILED;
+    i2c_error_code_ = error;
+    return;
+  }
+
   if (!(data_[0] == 0x41 && data_[1] == 0x53)) {
     ESP_LOGE(
         TAG,
@@ -45,8 +54,6 @@ void ADP2100Sensor::setup() {
 }
 
 void ADP2100Sensor::update() {
-  ESP_LOGI(TAG, "Update ADP2100 Sensor");
-
   ErrorCode error = this->write(kContinuousMeasurementCommand, kCommandLength);
   if (error != ErrorCode::NO_ERROR) {
     ESP_LOGE(TAG, "Error writing continuous measurement command");
@@ -58,11 +65,31 @@ void ADP2100Sensor::update() {
     ESP_LOGE(TAG, "Error reading continuous measurement data");
   }
 
-  // TODO: verify CRC
-  uint16_t raw_pressure = (data_[0] << 8) | data_[1];
+  uint8_t expected_crc = CalculateCRC(data_.data(), 2);
+  if (data_[2] != expected_crc) {
+    ESP_LOGE(TAG,
+             "Invalid CRC when reading pressure. Expected: 0x%2X, got: 0x%2X.",
+             expected_crc, data_[2]);
+  } else {
+    uint16_t raw_pressure = (data_[0] << 8) | data_[1];
 
-  if (this->pressure_sensor_) {
-    this->pressure_sensor_->publish_state(raw_pressure / 60.0);
+    if (this->pressure_sensor_) {
+      this->pressure_sensor_->publish_state(raw_pressure / 60.0);
+    }
+  }
+
+  expected_crc = CalculateCRC(&data_[3], 2);
+  if (data_[5] != expected_crc) {
+    ESP_LOGE(
+        TAG,
+        "Invalid CRC when reading temperature. Expected: 0x%2X, got: 0x%2X.",
+        expected_crc, data_[5]);
+  } else {
+    uint16_t raw_temperature = (data_[3] << 8) | data_[4];
+
+    if (this->temperature_sensor_) {
+      this->temperature_sensor_->publish_state(raw_temperature / 200.0);
+    }
   }
 }
 
@@ -85,6 +112,10 @@ void ADP2100Sensor::dump_config() {
     case SetupStatus::INCORRECT_PRODUCT_TYPE:
       ESP_LOGE(TAG, "  Incorrect product type");
       break;
+
+    case SetupStatus::PRODUCT_TYPE_CRC_FAILED:
+      ESP_LOGE(TAG, "  Product type CRC failed");
+      break;
   }
 
   if (i2c_error_code_ != ErrorCode::NO_ERROR) {
@@ -93,6 +124,22 @@ void ADP2100Sensor::dump_config() {
 
   LOG_I2C_DEVICE(this);
   LOG_UPDATE_INTERVAL(this);
+}
+
+uint8_t ADP2100Sensor::CalculateCRC(uint8_t *data, uint8_t length) {
+  uint8_t crc = 0xFF;
+
+  for (uint8_t byte = 0; byte < length; ++byte) {
+    crc ^= data[byte];
+    for (uint8_t bit = 8; bit > 0; --bit) {
+      if (crc & 0x80) {
+        crc = (crc << 1) ^ 0x31;
+      } else {
+        crc = crc << 1;
+      }
+    }
+  }
+  return crc;
 }
 
 }  // namespace esphome::adp2100

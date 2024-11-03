@@ -1,11 +1,11 @@
 #pragma once
 
+#include <array>
+
 #include "esphome/components/i2c/i2c.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
-
-#include <array>
 
 namespace esphome::adp2100 {
 
@@ -24,13 +24,14 @@ class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
   void dump_config() override;
 
  protected:
+  uint8_t CalculateCRC(uint8_t *data, uint8_t length);
+
   sensor::Sensor *pressure_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
 
   static constexpr uint8_t kCommandLength = 2;
   const uint8_t kProductTypeCommand[kCommandLength] = {0xE2, 0x01};
-  const uint8_t kContinuousMeasurementCommand[kCommandLength] = {
-      0x36, 0x1E};
+  const uint8_t kContinuousMeasurementCommand[kCommandLength] = {0x36, 0x1E};
 
   static constexpr uint8_t kDataLength = 6;
   std::array<uint8_t, kDataLength> data_;
@@ -39,7 +40,8 @@ class ADP2100Sensor : public PollingComponent, public i2c::I2CDevice {
     SUCCESS,
     WRITING_PRODUCT_TYPE_COMMAND,
     READING_PRODUCT_TYPE,
-    INCORRECT_PRODUCT_TYPE
+    INCORRECT_PRODUCT_TYPE,
+    PRODUCT_TYPE_CRC_FAILED,
   };
   SetupStatus setup_status_;
 

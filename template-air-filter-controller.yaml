@@ -37,8 +37,8 @@ esp32:
 # To be able to get logs from the device via serial and api.
 logger:
   level: DEBUG
-  logs:
-    adp2100: VERY_VERBOSE
+  #logs:
+  #  adp2100: VERY_VERBOSE
 
 # API is a requirement of the dashboard import.
 api:
@@ -278,6 +278,9 @@ sensor:
       id: pressure_drop
       name: Filter Pressure Drop
       unit_of_measurement: "Pa"
+    temperature:
+      id: temperature
+      name: Temperature
 
 spi:
   clk_pin: GPIO13

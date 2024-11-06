@@ -259,6 +259,30 @@ sensor:
     accuracy_decimals: 0
     state_class: "measurement"
 
+  - platform: template
+    name: Filter Pressure Drop
+    id: pressure_drop
+    unit_of_measurement: "Pa"
+    state_class: "measurement"
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - median:
+          # Will exclude up to a 5*5=25s outlier
+          window_size: 11
+          send_every: 1
+          send_first_at: 1
+      - exponential_moving_average:
+          alpha: 0.1
+          send_every: 4
+    lambda: |-
+      // Only publish a new state if the fan is at full speed
+      if (id(fan_0).speed == 100) {
+        return id(pressure_drop_raw).state;
+      } else {
+        return {};
+      }
+
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
   # - platform: adc
@@ -275,9 +299,10 @@ sensor:
     id: adp2100_sensor
     update_interval: 5s
     pressure:
-      id: pressure_drop
-      name: Filter Pressure Drop
+      id: pressure_drop_raw
+      name: Filter Pressure Drop (Raw)
       unit_of_measurement: "Pa"
+      internal: true
     temperature:
       id: temperature
       name: Temperature

@@ -258,12 +258,14 @@ sensor:
     unit_of_measurement: "RPM"
     accuracy_decimals: 0
     state_class: "measurement"
+    device_class: "speed"
 
   - platform: template
     name: Filter Pressure Drop
     id: pressure_drop
     unit_of_measurement: "Pa"
     state_class: "measurement"
+    device_class: "pressure"
     accuracy_decimals: 2
     update_interval: 5s
     filters:
@@ -280,7 +282,7 @@ sensor:
       if (id(fan_0).speed == 100) {
         return id(pressure_drop_raw).state;
       } else {
-        return {};
+        return NAN;
       }
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.

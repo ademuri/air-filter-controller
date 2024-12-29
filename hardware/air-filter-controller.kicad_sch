@@ -1603,224 +1603,6 @@
 				)
 			)
 		)
-		(symbol "Homebrew:ADP2100"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 1.016 8.636 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "ADP2100"
-				(at 4.572 -8.636 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://micronika.ru/upload/iblock/d03/ky33hrzrszlnmbmiyfqta85cqqrkyhtl.pdf"
-				(at 0.254 26.67 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Differential pressure sensor -500~500 Pa, 3.3v"
-				(at 0.254 24.384 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "LCSC" "C3012652"
-				(at -0.508 28.702 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "ADP2100_0_1"
-				(rectangle
-					(start -3.81 7.62)
-					(end 3.81 -7.62)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "ADP2100_1_0"
-				(pin no_connect line
-					(at 8.89 -3.81 180)
-					(length 5.08)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 8.89 -1.27 180)
-					(length 5.08)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 8.89 1.27 180)
-					(length 5.08)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 8.89 3.81 180)
-					(length 5.08)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "ADP2100_1_1"
-				(pin power_in line
-					(at 0 12.7 270)
-					(length 5.08)
-					(name "VDD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at -8.89 -1.27 0)
-					(length 5.08)
-					(name "SDA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -12.7 90)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -8.89 1.27 0)
-					(length 5.08)
-					(name "SCL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Homebrew:DC-005-2.5A-2.0"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -5534,12 +5316,6 @@
 		(uuid "523cb8fb-9973-42ce-afe3-f6a83b149d93")
 	)
 	(junction
-		(at 359.41 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "550afa27-2dfd-47d2-bb72-afbab12b35ad")
-	)
-	(junction
 		(at 88.9 187.96)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6205,16 +5981,6 @@
 	)
 	(wire
 		(pts
-			(xy 344.17 80.01) (xy 344.17 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "347d1ada-117c-4da2-8624-e763e7d8643b")
-	)
-	(wire
-		(pts
 			(xy 64.77 196.85) (xy 88.9 196.85)
 		)
 		(stroke
@@ -6292,16 +6058,6 @@
 			(type default)
 		)
 		(uuid "41de92f6-c467-4ea7-8346-b63a7b0f1028")
-	)
-	(polyline
-		(pts
-			(xy 369.57 73.66) (xy 369.57 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "428ffec5-69a0-489a-be45-62c02080c2d2")
 	)
 	(wire
 		(pts
@@ -6412,16 +6168,6 @@
 			(type default)
 		)
 		(uuid "4a58deec-1564-43c3-af20-215cf50c256c")
-	)
-	(polyline
-		(pts
-			(xy 326.39 73.66) (xy 326.39 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4aadf63d-b366-43ac-906f-63221968e0f0")
 	)
 	(wire
 		(pts
@@ -6573,16 +6319,6 @@
 		)
 		(uuid "5d57fdfc-2a86-4c48-b452-bd06c2e90450")
 	)
-	(polyline
-		(pts
-			(xy 326.39 73.66) (xy 369.57 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ea2dbf6-01ea-466a-a200-3c4770a1a5a4")
-	)
 	(wire
 		(pts
 			(xy 44.45 180.34) (xy 52.07 180.34)
@@ -6732,16 +6468,6 @@
 			(type default)
 		)
 		(uuid "75b00956-73fd-42df-89bf-928badfd89d6")
-	)
-	(wire
-		(pts
-			(xy 359.41 80.01) (xy 344.17 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "75bdfb50-67b6-4f1c-9fe5-a1f56e10b9cc")
 	)
 	(wire
 		(pts
@@ -7253,16 +6979,6 @@
 		)
 		(uuid "cf05153f-7e38-43fe-88aa-58300d531854")
 	)
-	(polyline
-		(pts
-			(xy 369.57 118.11) (xy 326.39 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d024048b-ce6e-43e3-9bac-87e0ea9e7fad")
-	)
 	(wire
 		(pts
 			(xy 365.76 46.99) (xy 365.76 45.72)
@@ -7553,16 +7269,6 @@
 		)
 		(uuid "2ee4fffb-904f-4763-96ca-9c817761fcb7")
 	)
-	(text "Differential pressure sensor"
-		(exclude_from_sim no)
-		(at 341.376 78.232 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "3d25c05c-9ab0-42fa-b41a-979826b9b54a")
-	)
 	(text "5V -> 3.3V linear regulator"
 		(exclude_from_sim no)
 		(at 29.464 209.55 0)
@@ -7573,13 +7279,14 @@
 		)
 		(uuid "4181ec1f-6b2e-4606-952e-cab76af5aa39")
 	)
-	(text "12V -> 5V switching regulator"
+	(text "12V -> \"5V\" switching regulator\nSet to 4.73V so that 3.3 >= 0.7 * VDD"
 		(exclude_from_sim no)
-		(at 29.972 165.354 0)
+		(at 14.478 165.608 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left)
 		)
 		(uuid "700b9982-a679-46fc-b8d4-0584dbcf6e5f")
 	)
@@ -7974,17 +7681,6 @@
 		)
 		(uuid "372588d3-046b-4625-86c5-76420cd740da")
 	)
-	(label "SDA"
-		(at 335.28 100.33 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "377884a0-8d26-4e5d-a4fc-63affe64ad2c")
-	)
 	(label "SCL"
 		(at 365.76 133.35 180)
 		(fields_autoplaced yes)
@@ -8314,17 +8010,6 @@
 			(justify left bottom)
 		)
 		(uuid "9b406731-18a4-4dd4-8db4-b8ecbc3190ae")
-	)
-	(label "SCL"
-		(at 335.28 97.79 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9b5bcfb6-0c0f-4eba-ad1f-7b7d0bd0c150")
 	)
 	(label "TACH9"
 		(at 165.1 74.93 180)
@@ -10743,6 +10428,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 387.35 48.26 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "3b533fc0-d375-42f3-a20b-4719bf98edd3")
+		(property "Reference" "H5"
+			(at 389.89 47.0478 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Strain Relief"
+			(at 389.89 49.4721 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Homebrew:3_pin_2.54mm_pitch_strain_relief"
+			(at 387.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 387.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 387.35 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
+					(reference "H5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 285.75 50.8 0)
 		(unit 1)
@@ -11998,7 +11747,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "WS2812B-2020"
 			(at 309.372 49.53 0)
 			(effects
 				(font
@@ -12006,7 +11755,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Homebrew:LED-SMD_4P-L1.6-W1.5_XL-1615RGBC-WS2812B"
+		(property "Footprint" "Homebrew:LED-SMD_4P-L2.0-W2.0-TL_WS2812B-2020"
 			(at 317.5 50.8 0)
 			(effects
 				(font
@@ -12514,72 +12263,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 359.41 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "672d9737-397f-48c6-82f2-3d4493f62193")
-		(property "Reference" "#PWR013"
-			(at 359.41 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 359.41 75.8769 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 359.41 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 359.41 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 359.41 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "be2387fa-5334-447d-b249-12f5ff47ae85")
-		)
-		(instances
-			(project "air-filter-controller"
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "LED:WS2812B")
 		(at 285.75 43.18 0)
 		(unit 1)
@@ -12596,7 +12279,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "WS2812B-2020"
 			(at 278.892 49.53 0)
 			(effects
 				(font
@@ -12604,7 +12287,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Homebrew:LED-SMD_4P-L1.6-W1.5_XL-1615RGBC-WS2812B"
+		(property "Footprint" "Homebrew:LED-SMD_4P-L2.0-W2.0-TL_WS2812B-2020"
 			(at 287.02 50.8 0)
 			(effects
 				(font
@@ -14522,72 +14205,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 359.41 87.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "95804719-00eb-49a7-ab51-a0a4cdffb517")
-		(property "Reference" "#PWR014"
-			(at 359.41 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 359.41 91.7631 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 359.41 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 359.41 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 359.41 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "781d01cb-e514-4c89-a53a-21ccb4bf41ef")
-		)
-		(instances
-			(project "air-filter-controller"
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "#PWR014")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 152.4 33.02 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -14941,7 +14558,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "WS2812B-2020"
 			(at 324.612 49.53 0)
 			(effects
 				(font
@@ -14949,7 +14566,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Homebrew:LED-SMD_4P-L1.6-W1.5_XL-1615RGBC-WS2812B"
+		(property "Footprint" "Homebrew:LED-SMD_4P-L2.0-W2.0-TL_WS2812B-2020"
 			(at 332.74 50.8 0)
 			(effects
 				(font
@@ -15628,7 +15245,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "15k 1%"
+		(property "Value" "16k 1%"
 			(at 90.678 192.9821 0)
 			(effects
 				(font
@@ -15664,7 +15281,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25756"
+		(property "LCSC" "C25759"
 			(at 88.9 191.77 0)
 			(effects
 				(font
@@ -16623,103 +16240,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Homebrew:ADP2100")
-		(at 344.17 99.06 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp yes)
-		(fields_autoplaced yes)
-		(uuid "c57a1420-c3c9-43b9-b6c9-05eea3e74e06")
-		(property "Reference" "U2"
-			(at 346.3641 87.4225 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "ADP2100"
-			(at 346.3641 89.8468 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Homebrew:ADP2100_HandSoldering"
-			(at 344.17 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://micronika.ru/upload/iblock/d03/ky33hrzrszlnmbmiyfqta85cqqrkyhtl.pdf"
-			(at 344.424 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Differential pressure sensor -500~500 Pa, 3.3v"
-			(at 344.424 74.676 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C3012652"
-			(at 343.662 70.358 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "88f12ad3-b5ea-4ff2-878b-ba8fc6c26bde")
-		)
-		(pin ""
-			(uuid "60bfb7eb-c500-4c17-a122-39f40dd35703")
-		)
-		(pin "1"
-			(uuid "0b056904-4bd6-4636-aaa8-985446b1a24c")
-		)
-		(pin "2"
-			(uuid "10c119f1-4944-42c6-a2ff-76307db3a453")
-		)
-		(pin "3"
-			(uuid "7cc4dbe6-ce7f-445c-b2a1-719daac15c00")
-		)
-		(pin "4"
-			(uuid "59a23eb6-5e08-4779-8397-0195222b79ac")
-		)
-		(pin ""
-			(uuid "b2479e86-f635-431f-9bce-d41dc78ab2fb")
-		)
-		(pin ""
-			(uuid "8ecffcb6-e0c2-4c1e-a7f0-b06cf2204080")
-		)
-		(instances
-			(project ""
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 184.15 21.59 0)
 		(unit 1)
@@ -17434,72 +16954,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 344.17 111.76 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dc4a17f1-1b89-4486-8459-724a308319b8")
-		(property "Reference" "#PWR015"
-			(at 344.17 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 344.17 115.8931 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 344.17 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 344.17 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 344.17 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "8bb2f2af-ca39-4a40-9822-5e1b8fa1c16b")
-		)
-		(instances
-			(project "air-filter-controller"
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "#PWR015")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 369.57 27.94 0)
 		(unit 1)
@@ -17595,7 +17049,7 @@
 				)
 			)
 		)
-		(property "Value" "WS2812B"
+		(property "Value" "WS2812B-2020"
 			(at 294.132 49.53 0)
 			(effects
 				(font
@@ -17603,7 +17057,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Homebrew:LED-SMD_4P-L1.6-W1.5_XL-1615RGBC-WS2812B"
+		(property "Footprint" "Homebrew:LED-SMD_4P-L2.0-W2.0-TL_WS2812B-2020"
 			(at 302.26 50.8 0)
 			(effects
 				(font
@@ -18092,85 +17546,6 @@
 			(project "air-filter-controller"
 				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
 					(reference "C8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 359.41 83.82 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ee3c2f03-a126-49ed-8ed9-a220b30b95dd")
-		(property "Reference" "C6"
-			(at 362.331 82.6078 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 362.331 85.0321 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 360.3752 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 359.41 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 359.41 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C307331"
-			(at 359.41 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "25ae5c8b-32f5-48b2-9734-722f20d82106")
-		)
-		(pin "2"
-			(uuid "4abe65d6-1536-4dd3-aa7c-84b12e89851d")
-		)
-		(instances
-			(project "air-filter-controller"
-				(path "/507e7113-3c01-4251-b852-8c77f2a74b1d"
-					(reference "C6")
 					(unit 1)
 				)
 			)

@@ -21,3 +21,11 @@ The ESP32-S3 datasheet says that the power supply should support at least 500mA.
 Using [this buck converter calculator](http://schmidt-walter-schaltnetzteile.de/smps_e/abw_smps_e.html), a 100uH inductor means that the maximum ripple current will be about 50mA.
 
 The chosen inductor (`SWPA8065S101MT`) has a max DC resistance of 0.28Ω, and a max heat-rating current of 1.35A. If the ESP32-S3 draws 500mA, this leaves >500mA for LEDs. This is sufficient.
+
+#### Filtering
+
+I did a conducted emissions pre-test for v1.0, using a dual 5uH LISN between the board and an adjustable DC power supply. With the board on and idle, I saw a few concerning peaks:
+
+- A sharp peak around 725 kHz, about 10dB above the limit
+- Sharp peaks around 3.6kHz, 1.4 MHz, 2.2 MHz, and 3.6 MHz - these are >3dB below the limit
+- Broadband noise between 300kHz to 400kHz

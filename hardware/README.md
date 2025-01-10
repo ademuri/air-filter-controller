@@ -24,8 +24,12 @@ The chosen inductor (`SWPA8065S101MT`) has a max DC resistance of 0.28Ω, and a 
 
 #### Filtering
 
-I did a conducted emissions pre-test for v1.0, using a dual 5uH LISN between the board and an adjustable DC power supply. With the board on and idle, I saw a few concerning peaks:
+I did a conducted emissions pre-test for v1.0, using a dual 5uH LISN between the board and an adjustable DC power supply. With the board on and idle (30-40mA pulled from the 12V source), I saw a few concerning peaks:
 
 - A sharp peak around 725 kHz, about 10dB above the limit
 - Sharp peaks around 3.6kHz, 1.4 MHz, 2.2 MHz, and 3.6 MHz - these are >3dB below the limit
 - Broadband noise between 300kHz to 400kHz
+
+Increasing the load on the buck converter slightly by turning on the indicator LED to full white (50-55mA pulled @12V), the peaks get sharper, with the 365 kHz peak exceeding the limit by 6dB, and the 1.4MHz peak exceeding the limit by ~8dB.
+
+There isn't much change with one fan plugged in on full power.

@@ -79,30 +79,6 @@ output:
     id: fan_pwm1
     frequency: "20kHz"
     channel: 0
-  - platform: ledc
-    pin:
-      number: GPIO40
-      # LED is specced at 30mA, and there's a 10ohm resistor.
-      drive_strength: "20mA"
-    id: led_g
-    frequency: "20kHz"
-    channel: 1
-  - platform: ledc
-    pin: 
-      number: GPIO41
-      # LED is specced at 30mA, and there's a 10ohm resistor.
-      drive_strength: "20mA"
-    id: led_r
-    frequency: "20kHz"
-    channel: 4
-  - platform: ledc
-    pin:
-      number: GPIO42
-      # LED is specced at 30mA, and there's a 10ohm resistor.
-      drive_strength: "20mA"
-    id: led_b
-    frequency: "20kHz"
-    channel: 5
 
 # Buzzer
 # https://esphome.io/components/rtttl
@@ -155,12 +131,14 @@ fan:
 
 # https://esphome.io/components/light/rgb.html
 light:
-  - platform: rgb
+  - platform: esp32_rmt_led_strip
+    rgb_order: GRB
+    pin: GPIO40
+    num_leds: 4
+    rmt_channel: 1
+    chipset: WS2812
     id: indicator_light
     name: "Indicator Light"
-    red: led_r
-    green: led_g
-    blue: led_b
 
 sensor:
   - platform: pulse_counter
@@ -226,6 +204,14 @@ sensor:
     use_pcnt: false
     disabled_by_default: true
     accuracy_decimals: 0
+  - platform: pulse_counter
+    pin: GPIO13
+    name: Fan 9 Tach
+    update_interval: 5s
+    id: fan_9_tach
+    use_pcnt: false
+    disabled_by_default: true
+    accuracy_decimals: 0
 
   # https://esphome.io/components/sensor/duty_time.html
   - platform: duty_time
@@ -252,26 +238,20 @@ sensor:
 
   # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
   # TODO: re-enable this once board is revised to use ADC channel 1.
-  # - platform: adc
-  #   pin: GPIO17
-  #   name: "Input Voltage"
-  #   update_interval: 10s
-  #   attenuation: 11dB
-  #   samples: 3
-  #   filters:
-  #     # R1 = 680k, R2 = 220k
-  #     - multiply: 4.0909
-
-spi:
-  clk_pin: GPIO13
-  mosi_pin: GPIO15
-  miso_pin: GPIO14
-  interface: hardware
+  - platform: adc
+    pin: GPIO1
+    name: "Input Voltage"
+    update_interval: 10s
+    attenuation: 12dB
+    samples: 3
+    filters:
+      # R1 = 680k, R2 = 220k
+      - multiply: 4.0909
 
 binary_sensor:
   - platform: gpio
     pin: 
-      number: GPIO1
+      number: GPIO45
       inverted: true
       mode:
         input: true

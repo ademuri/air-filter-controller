@@ -63,7 +63,10 @@
           "width": 0.348
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "starved_thermal|110305000|73970000|43fcf44d-e2c0-4eff-a531-ce5d6f0e1261|10085bf7-7e2d-4579-852c-2b8abafd3238|B.Cu",
+        "starved_thermal|110305000|73970000|43fcf44d-e2c0-4eff-a531-ce5d6f0e1261|10085bf7-7e2d-4579-852c-2b8abafd3238|F.Cu"
+      ],
       "meta": {
         "version": 2
       },
@@ -81,7 +84,7 @@
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_symbol_mismatch": "warning",
-        "footprint_type_mismatch": "ignore",
+        "footprint_type_mismatch": "warning",
         "hole_clearance": "error",
         "hole_near_hole": "error",
         "holes_co_located": "warning",
@@ -94,12 +97,12 @@
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "net_conflict": "warning",
-        "npth_inside_courtyard": "ignore",
+        "npth_inside_courtyard": "warning",
         "padstack": "warning",
-        "pth_inside_courtyard": "ignore",
+        "pth_inside_courtyard": "warning",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",

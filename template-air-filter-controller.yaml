@@ -80,6 +80,12 @@ output:
     frequency: "20kHz"
     channel: 0
 
+uart:
+  - id: pm_uart_0
+    tx_pin: GPIO17
+    rx_pin: GPIO14
+    baud_rate: 9600
+
 # Buzzer
 # https://esphome.io/components/rtttl
 rtttl:
@@ -113,6 +119,11 @@ switch:
     turn_off_action:
       then:
         - output.turn_off: buzzer_output
+
+  - platform: gpio
+    pin: GPIO46
+    name: "PM5003 Enable"
+    id: pm5003_enable
 
 # https://esphome.io/components/fan/speed
 fan:
@@ -236,8 +247,7 @@ sensor:
     accuracy_decimals: 0
     state_class: "measurement"
 
-  # Input voltage via divider. Currently doesn't work, because it's on ADC 2, which doesn't work while WiFi is enabled.
-  # TODO: re-enable this once board is revised to use ADC channel 1.
+  # Input voltage via divider.
   - platform: adc
     pin: GPIO1
     name: "Input Voltage"
@@ -247,6 +257,16 @@ sensor:
     filters:
       # R1 = 680k, R2 = 220k
       - multiply: 4.0909
+
+  - platform: pmsx003
+    type: PMSX003
+    pm_1_0:
+      name: "PM1.0"
+    pm_2_5:
+      name: "PM2.5"
+    pm_10_0:
+      name: "PM10.0"
+    uart_id: pm_uart_0
 
 binary_sensor:
   - platform: gpio

@@ -21,9 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.2
       - name: Run action
-        uses: esphome/build-action@v4.0.2
+        uses: esphome/build-action@v6.0.0
         id: esphome-build
         with:
           yaml-file: example.yaml

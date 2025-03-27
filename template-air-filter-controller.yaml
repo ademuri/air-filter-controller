@@ -14,8 +14,8 @@ esphome:
   # This will allow for (future) project identification,
   # configuration and updates.
   project:
-    name: esphome.air-filter-controller-template
-    version: "1.0"
+    name: "ademuri.air-filter-controller-template"
+    version: "0.2.0"
 
   on_boot:
     priority: -100.0
@@ -52,18 +52,16 @@ safe_mode:
   # https://esphome.io/components/safe_mode
   # disabled: true
 
-# TODO: fill this out or remove it
-# This should point to the public location of this yaml file.
-# dashboard_import:
-#   package_import_url: github://esphome/esphome-project-template/project-template-esp32.yaml@v6
-#   import_full_config: false # or true
+dashboard_import:
+  package_import_url: github://ademuri/air-filter-controller/template-air-filter-controller.yaml
+  import_full_config: false
 
 output:
   - platform: ledc
     id: buzzer_output
     pin:
       number: GPIO47
-      # Buzzer is specced at 50mA, and there's a 47ohm resistor.
+      # Buzzer is specced at 50mA
       drive_strength: "40mA"
     frequency: "6kHz"
     channel: 2

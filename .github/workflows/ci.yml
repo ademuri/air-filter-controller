@@ -23,10 +23,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Run action
-        uses: esphome/build-action@v6.0.0
+        uses: esphome/build-action@v7.0.0
         id: esphome-build
         with:
           yaml-file: example.yaml
           version: stable
-          platform: linux/amd64
-          cache: true

@@ -14,7 +14,7 @@ esphome:
   # configuration and updates.
   project:
     name: "ademuri.air-filter-controller-template"
-    version: "0.2.0"
+    version: "0.3.0"
 
   on_boot:
     priority: -100.0
@@ -54,6 +54,16 @@ safe_mode:
 dashboard_import:
   package_import_url: github://ademuri/air-filter-controller/template-air-filter-controller.yaml
   import_full_config: false
+
+text_sensor:
+  - platform: template
+    name: "ESPHome Template Version"
+    id: esphome_template_version
+    icon: "mdi:information-box"
+    entity_category: "diagnostic"
+    update_interval: 600s
+    lambda: |-
+      return { ESPHOME_PROJECT_VERSION " " + App.get_compilation_time() };
 
 output:
   - platform: ledc
